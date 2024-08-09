@@ -1,10 +1,39 @@
+## 获取当前时间
+
+```java
+Calendar cal = Calendar.getInstance();
+System.out.println(cal.get(Calendar.YEAR));
+System.out.println(cal.get(Calendar.MONTH)); // 0 - 11
+System.out.println(cal.get(Calendar.DATE));
+System.out.println(cal.get(Calendar.HOUR_OF_DAY));
+System.out.println(cal.get(Calendar.MINUTE));
+System.out.println(cal.get(Calendar.SECOND));
+// Java 8
+LocalDateTime dt = LocalDateTime.now();
+System.out.println(dt.getYear());
+System.out.println(dt.getMonthValue()); // 1 - 12
+System.out.println(dt.getDayOfMonth());
+System.out.println(dt.getHour());
+System.out.println(dt.getMinute());
+System.out.println(dt.getSecond());
+
+// 毫秒
+Calendar.getInstance().getTimeInMillis(); //第一种方式
+System.currentTimeMillis(); //第二种方式
+// Java 8
+Clock.systemDefaultZone().millis();
+```
+
+
+
 ## 格式化
 
 ```java
+// Java7
 SimpleDateFormat oldFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.sss");
 Date date = new Date();
 oldFormatter.format(date);
-// Java 8
+// Java8
 DateTimeFormatter newFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.sss");
 LocalDateTime date = LocalDateTime.now();
 date2.format(newFormatter);
@@ -13,11 +42,11 @@ date2.format(newFormatter);
 ## 解析
 
 ```java
+// Java7
 String dateStr = "2022-01-01 08:00:00.000";
 SimpleDateFormat oldFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.sss");
 Date oldDate = oldFormatter.parse(dateStr);
-
-// java8
+// Java8
 DateTimeFormatter newFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.sss");
 LocalDateTime localDateTime = LocalDateTime.parse(dateStr, newFormatter);
 // 转换

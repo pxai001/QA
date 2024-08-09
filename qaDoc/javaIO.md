@@ -12,7 +12,7 @@ while ((readNum = bufferedInputStream.read(b)) != -1) {
   fileOutputStream.write(b, 0, readNum);
   fileOutputStream.flush();
 
-  BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(fileOutputStream);
+  BufferedOutputStream bufferedOutputStream = new 	BufferedOutputStream(fileOutputStream);
   bufferedOutputStream.write(b, 0, readNum);
   bufferedOutputStream.flush();
 }
@@ -34,16 +34,17 @@ InputStreamReader gbkIn = new InputStreamReader(new FileInputStream(""), "GBK");
 OutputStreamWriter gbkOut = new OutputStreamWriter(new FileOutputStream(""), "GBK");
 ```
 
-## 对象流（克隆）
+## 对象流
 
 ```java
+// 克隆
 ByteArrayOutputStream bout = new ByteArrayOutputStream();
 ObjectOutputStream oos = new ObjectOutputStream(bout);
 oos.writeObject(new Object());
 ByteArrayInputStream bin = new ByteArrayInputStream(bout.toByteArray());
 ObjectInputStream ois = new ObjectInputStream(bin);
 ois.readObject();
-
+// 对象序列化
 ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(""));
 ByteArrayInputStream bin = new ByteArrayInputStream(new FileInputStream(""));
 ```

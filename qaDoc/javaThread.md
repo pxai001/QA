@@ -20,6 +20,13 @@ static class CallableThread implements Callable<String> {
 }
 ```
 
+## 线程互斥，同步，通信
+
+1. 主子任务：通过变量判断主子哪个执行；不满足条件 wait，满足条件执行完 notify
+2. 共享数据：同一变量不同线程同时操作，操作方法加锁
+3. 线程局部变量 ThreadLocal，set 将当前对象为键，值为传参；remove 释放内存
+4. wait等待并释放锁，sleep睡眠不释放锁，notify释放锁唤醒（获取锁的线程由jvm决定），notifyAll释放锁唤醒（所有线程竞争获取锁）
+
 ## 线程池
 
 ```java
@@ -104,3 +111,30 @@ MyRecursiveAction myRecursiveAction = new MyRecursiveAction(24);
 //ForkJoinPool 执行任务，execute 只提交无返回值；submit 提交，通过get获取返回值；invoke 提交 join 操作同步到主线程
 Long res = forkJoinPool.invoke(myRecursiveAction);
 ```
+
+## 定时器
+
+```java
+Timer timer = new Timer();
+timer.schedule(new MyTimerTask() {
+  @Override
+  public void run() {
+    count = (count +1)%2;
+    System.err.println("Boob boom ");
+    new Timer().schedule(new TimerTastCus(), 2000+2000*count);
+  }
+}, 1000);
+```
+
+## 死锁
+
+1. 条件
+   * 互斥：一个线程占有另一个只能等待
+   * 不剥夺：其他线程不能抢占，只能本线程释放
+   * 请求保持：已有资源，请求新资源但被占用，当前资源不释放，等待新资源释放
+   * 循环等待：线程一等待线程二资源，线程二等待线程一资源
+2. 避免
+   * 加锁顺序一致：a和b资源都按同样顺序加锁
+   * 加锁时限：获取不到锁就放弃当前资源
+   * 避免锁嵌套
+   * 预分配资源

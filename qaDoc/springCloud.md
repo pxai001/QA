@@ -153,7 +153,7 @@
            defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
      ```
 
-## 配置中心
+## 服务调用
 
 * feign
 
@@ -203,10 +203,10 @@
       }
      ```
 
-## 服务调用
-
 ## 服务熔断
 
 ## 网关
+
+## 分布式配置中心
 
 ## 分布式事务

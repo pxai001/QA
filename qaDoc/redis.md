@@ -90,3 +90,4 @@
 * 多个命令同时执行，先读，再写，再读
   * INCR，DECR
   * LUA 脚本
+* Redistion
